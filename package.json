@@ -1,6 +1,6 @@
 {
   "name": "@socio-development/jsg",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "TypeScript-first JSON schema declaration library",
   "author": "CasperSocio <https://github.com/CasperSocio>",
   "license": "MIT",
