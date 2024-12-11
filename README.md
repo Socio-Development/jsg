@@ -3,7 +3,7 @@
 JSG is a TypeScript-first JSON schema declaration library inspired by [zod](https://zod.dev/).
 
 ```ts
-import jsg from '@socio-development/json-schema-generator'
+import jsg from '@socio-development/jsg'
 
 const usernameSchema = jsg
   .string()
