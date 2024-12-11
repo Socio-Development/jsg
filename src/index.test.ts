@@ -2,6 +2,7 @@ import { JsgArray } from './array'
 import { JsgBoolean } from './boolean'
 import jsg from './index'
 import { JsgNumber } from './number'
+import { JsgObject } from './object'
 import { JsgString } from './string'
 
 describe('jsg', () => {
@@ -27,6 +28,15 @@ describe('jsg', () => {
     it('returns a JsgNumber instance', () => {
       const actual = jsg.number()
       const expected = new JsgNumber()
+
+      expect(actual).toEqual(expected)
+    })
+  })
+
+  describe('object', () => {
+    it('returns a JsgObject instance', () => {
+      const actual = jsg.object()
+      const expected = new JsgObject()
 
       expect(actual).toEqual(expected)
     })
