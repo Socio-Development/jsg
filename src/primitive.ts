@@ -1,21 +1,4 @@
-/**
- * Every JSON schema element contains a type property.
- * This type is a union of the supported JSON schema types.
- */
-type JsgBaseType = 'array' | 'boolean' | 'number' | 'object' | 'string'
-
-/**
- * The base properties available to every JSON schema element.
- */
-type JsgBaseProps = {
-  description?: string
-  type: JsgBaseType
-}
-
-/**
- * A utility type that merges the generic type T with the base schema properties.
- */
-type JsgProps<T> = T & JsgBaseProps
+import type { JsgBaseProps, JsgBaseType, JsgProps } from './types'
 
 export default abstract class JsgPrimitive<T> {
   private _baseProps: JsgBaseProps

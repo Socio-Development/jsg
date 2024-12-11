@@ -11,3 +11,9 @@ export const usernameSchema = jsg
   .minLength(3)
   .maxLength(20)
   .pattern('^[a-zA-Z]')
+
+export const userSchema = jsg.object({
+  firstName: firstNameSchema,
+  lastName: lastNameSchema,
+  username: usernameSchema,
+})

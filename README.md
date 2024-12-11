@@ -5,33 +5,49 @@ JSG is a TypeScript-first JSON schema declaration library inspired by [zod](http
 ```ts
 import jsg from '@socio-development/jsg'
 
+const firstNameSchema = jsg.string().minLength(1).maxLength(50)
+const lastNameSchema = jsg.string().minLength(1).maxLength(50)
+
 const usernameSchema = jsg
   .string()
-  .minLength(6)
+  .description(
+    'The username must be unique as it is often used as a slug in URLs.'
+  )
+  .minLength(3)
   .maxLength(20)
-  .pattern('^[a-zA-Z][a-zA-Z0-9_]*$')
+  .pattern('^[a-zA-Z]')
 
-const userSchema = jsg
-  .object({
-    username: usernameSchema,
-  })
-  .description('A user object.')
+const userSchema = jsg.object({
+  firstName: firstNameSchema,
+  lastName: lastNameSchema,
+  username: usernameSchema,
+})
 
-console.log(userSchema.stringify())
+console.log(JSON.stringify(userSchema, null, 2))
 ```
 
 ```json
 {
   "type": "object",
-  "description": "A user object.",
   "properties": {
+    "firstName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50
+    },
+    "lastName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50
+    },
     "username": {
       "type": "string",
-      "minLength": 6,
+      "description": "The username must be unique as it is often used as a slug in URLs.",
+      "minLength": 3,
       "maxLength": 20,
-      "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$"
+      "pattern": "^[a-zA-Z]"
     }
   },
-  "required": ["username"]
+  "required": ["firstName", "lastName", "username"]
 }
 ```

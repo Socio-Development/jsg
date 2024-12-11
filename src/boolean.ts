@@ -1,9 +1,5 @@
 import JsgPrimitive from './primitive'
-
-/**
- * Properties available for the JSON schema boolean type.
- */
-type JsgBooleanProps = {}
+import type { JsgBooleanProps } from './types'
 
 /**
  * A class for defining JSON Schema Generator boolean types.

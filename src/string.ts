@@ -1,13 +1,5 @@
 import JsgPrimitive from './primitive'
-
-/**
- * Properties available for the JSON schema string type.
- */
-type JsgStringProps = {
-  maxLength?: number
-  minLength?: number
-  pattern?: string
-}
+import type { JsgStringProps } from './types'
 
 /**
  * A class for defining JSON Schema Generator string types.
