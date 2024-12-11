@@ -1,2 +1,2 @@
 npx lint-staged
-npm run test -- --ci --coverage --detectOpenHandles --forceExit
+npm run test -- --ci
