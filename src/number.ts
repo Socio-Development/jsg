@@ -1,15 +1,5 @@
 import JsgPrimitive from './primitive'
-
-/**
- * Properties available for the JSON schema number type.
- */
-type JsgNumberProps = {
-  exclusiveMaximum?: number
-  exclusiveMinimum?: number
-  maximum?: number
-  minimum?: number
-  multipleOf?: number
-}
+import type { JsgNumberProps } from './types'
 
 /**
  * A class for defining JSON Schema Generator number types.

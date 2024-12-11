@@ -1,11 +1,5 @@
 import JsgPrimitive from './primitive'
-
-/**
- * Properties available for the JSON schema array type.
- */
-type JsgArrayProps = {
-  uniqueItems?: boolean
-}
+import type { JsgArrayProps } from './types'
 
 /**
  * A class for defining JSON Schema Generator array types.

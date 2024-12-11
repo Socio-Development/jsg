@@ -1,9 +1,5 @@
 import JsgPrimitive from './primitive'
-
-/**
- * Properties available for the JSON schema object type.
- */
-type JsgObjectProps = {}
+import type { JsgObjectProps } from './types'
 
 /**
  * A class for defining JSON Schema Generator object types.
