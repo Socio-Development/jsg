@@ -39,6 +39,19 @@ export class JsgObject extends JsgPrimitive<JsgObjectProps> {
       res.properties = properties
     }
 
+    const required = this._required
+    if (required) {
+      res.required = required
+    }
+
     return res
+  }
+
+  private get _required(): string[] | undefined {
+    const requiredKeys = this._properties
+      .filter(({ value }) => !value['_optional'])
+      .map(({ key }) => key)
+
+    return requiredKeys.length > 0 ? requiredKeys : undefined
   }
 }

@@ -115,6 +115,23 @@ describe('JsgObject', () => {
 
     it('returns properties when _propertiesToJSON is defined', () => {
       const el = new JsgObject({
+        age: new JsgNumber().minimum(0).optional(),
+        name: new JsgString().optional(),
+      })
+
+      const actual = el['_props']
+      const expected = {
+        properties: {
+          age: { type: 'number', minimum: 0 },
+          name: { type: 'string' },
+        },
+      }
+
+      expect(actual).toEqual(expected)
+    })
+
+    it('returns required properties', () => {
+      const el = new JsgObject({
         age: new JsgNumber().minimum(0),
         name: new JsgString(),
       })
@@ -125,7 +142,34 @@ describe('JsgObject', () => {
           age: { type: 'number', minimum: 0 },
           name: { type: 'string' },
         },
+        required: ['age', 'name'],
       }
+
+      expect(actual).toEqual(expected)
+    })
+  })
+
+  describe('_required', () => {
+    it('returns required properties', () => {
+      const el = new JsgObject({
+        age: new JsgNumber().minimum(0),
+        name: new JsgString(),
+      })
+
+      const actual = el['_required']
+      const expected = ['age', 'name']
+
+      expect(actual).toEqual(expected)
+    })
+
+    it('sorts required property keys', () => {
+      const el = new JsgObject({
+        b: new JsgString(),
+        a: new JsgNumber(),
+      })
+
+      const actual = el['_required']
+      const expected = ['a', 'b']
 
       expect(actual).toEqual(expected)
     })
