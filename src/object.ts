@@ -54,4 +54,15 @@ export class JsgObject extends JsgPrimitive<JsgObjectProps> {
 
     return requiredKeys.length > 0 ? requiredKeys : undefined
   }
+
+  /**
+   * Returns a new JsgObject with the given properties added to the existing properties.
+   */
+  extend(props: Record<string, JsgAny> = {}): JsgObject {
+    const newObject = new JsgObject(props)
+    newObject['_baseProps'] = this['_baseProps']
+    newObject._properties = [...this._properties, ...newObject._properties]
+
+    return newObject
+  }
 }

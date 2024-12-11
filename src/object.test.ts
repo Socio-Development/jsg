@@ -174,4 +174,30 @@ describe('JsgObject', () => {
       expect(actual).toEqual(expected)
     })
   })
+
+  describe('extend', () => {
+    it('returns a new JsgObject with the given properties added to the existing properties', () => {
+      const ageSchema = new JsgNumber().minimum(0).optional()
+      const nameSchema = new JsgString()
+      const namelessSchema = new JsgObject({ age: ageSchema })
+      const personSchema = namelessSchema.extend({ name: nameSchema })
+
+      const expected = new JsgObject({
+        age: ageSchema,
+        name: nameSchema,
+      })
+
+      expect(personSchema).toEqual(expected)
+    })
+
+    it('retains base properties', () => {
+      const requiredEl = new JsgObject()
+      const extendedRequiredEl = requiredEl.extend()
+      const optionalEl = new JsgObject().optional()
+      const extendedOptionalEl = optionalEl.extend()
+
+      expect(extendedRequiredEl['_baseProps']).toEqual(requiredEl['_baseProps'])
+      expect(extendedOptionalEl['_baseProps']).toEqual(optionalEl['_baseProps'])
+    })
+  })
 })
