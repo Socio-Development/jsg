@@ -1,3 +1,24 @@
+import { JsgArray } from './array'
+import { JsgBoolean } from './boolean'
+import { JsgNumber } from './number'
+import { JsgObject } from './object'
+import { JsgString } from './string'
+
+/**
+ * A union of all the JSON schema types.
+ */
+export type JsgAny = JsgArray | JsgBoolean | JsgNumber | JsgObject | JsgString
+
+/**
+ * A union of all the JSON schema properties available to the different JSON schema types.
+ */
+export type JsgAnyProps =
+  | JsgArrayProps
+  | JsgBooleanProps
+  | JsgNumberProps
+  | JsgObjectProps
+  | JsgStringProps
+
 /**
  * Properties available for the JSON schema array type.
  */
@@ -38,7 +59,10 @@ export type JsgNumberProps = {
 /**
  * Properties available for the JSON schema object type.
  */
-export type JsgObjectProps = {}
+export type JsgObjectProps = {
+  properties?: Record<string, JsgProps<JsgAnyProps>>
+  required?: string[]
+}
 
 /**
  * A utility type that merges the generic type T with the base schema properties.
