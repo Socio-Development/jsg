@@ -1,9 +1,19 @@
+import { JsgArray } from './array'
 import { JsgBoolean } from './boolean'
 import jsg from './index'
 import { JsgNumber } from './number'
 import { JsgString } from './string'
 
 describe('jsg', () => {
+  describe('array', () => {
+    it('returns a JsgArray instance', () => {
+      const actual = jsg.array()
+      const expected = new JsgArray()
+
+      expect(actual).toEqual(expected)
+    })
+  })
+
   describe('boolean', () => {
     it('returns a JsgBoolean instance', () => {
       const actual = jsg.boolean()
