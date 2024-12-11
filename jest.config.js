@@ -19,6 +19,7 @@ module.exports = {
     '<rootDir>/dist',
     '<rootDir>/playground',
     '<rootDir>/node_modules',
+    '<rootDir>/scripts',
     '<rootDir>/jest.config.js',
     '<rootDir>/LICENSE',
     '<rootDir>/package.json',

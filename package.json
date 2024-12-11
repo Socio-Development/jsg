@@ -31,6 +31,7 @@
     "dev": "tsx playground/main.ts",
     "format": "prettier --write .",
     "prepare": "husky",
+    "semver": "tsx scripts/semver.ts",
     "test:cov": "jest --coverage",
     "test:watch": "jest --watch",
     "test": "jest"
