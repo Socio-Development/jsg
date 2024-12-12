@@ -17,6 +17,7 @@ module.exports = {
     '<rootDir>/.vscode',
     '<rootDir>/coverage',
     '<rootDir>/dist',
+    '<rootDir>/lib',
     '<rootDir>/playground',
     '<rootDir>/node_modules',
     '<rootDir>/scripts',

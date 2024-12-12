@@ -17,17 +17,17 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.js"
+      "import": "./lib/index.js",
+      "require": "./lib/index.js"
     }
   },
   "files": [
-    "dist"
+    "lib"
   ],
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "scripts": {
-    "build": "rm -rf dist && tsc --build",
+    "build": "rm -rf lib && tsc --build",
     "dev": "tsx playground/main.ts",
     "format": "prettier --write .",
     "prepare": "husky",
