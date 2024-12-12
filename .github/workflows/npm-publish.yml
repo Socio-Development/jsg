@@ -1,49 +1,69 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is published
 # For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
 
-name: Node.js Package
+name: Publish NPM Package
 
 on:
   release:
     types: [published]
 
-env:
-  PKG_VERSION: ''
-  RELEASE_VERSION: ''
-
 jobs:
-  check-version:
+  get-versions:
+    name: Get versions
+
     runs-on: ubuntu-latest
+
+    outputs:
+      PKG_VERSION: ${{ steps.extract-package-version.outputs.PKG_VERSION }}
+      RELEASE_VERSION: ${{ steps.extract-release-version.outputs.RELEASE_VERSION }}
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          cache: 'npm'
-          node-version: 20
+      - name: Extract package version
+        id: extract-package-version
+        shell: bash
+        run: |
+          ROOT_PATH="${1-.}"
+          PKG_JSON_PATH="${ROOT_PATH}/package.json"
+          PKG_VERSION=$(jq -r '.version' < "${PKG_JSON_PATH}")
+          echo "PKG_VERSION=v${PKG_VERSION}" >> $GITHUB_OUTPUT
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Get package version
-        id: pkg
-        run: echo "PKG_VERSION=$(npm run semver --silent)" >> $GITHUB_ENV
+      - name: Extract release version
+        id: extract-release-version
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
         shell: bash
 
-      - name: Get release version
-        id: rel
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-
-      - name: Compare versions
+      - name: Print extracted versions
+        shell: bash
         run: |
-          if [ "v${{ env.PKG_VERSION }}" != "${{ env.RELEASE_VERSION }}" ]; then
-          echo "Version mismatch: package.json version (${{ env.PKG_VERSION }}) does not match release version (${{ env.RELEASE_VERSION }})"
-          exit 1
+          echo "Package version is ${{ steps.extract-package-version.outputs.PKG_VERSION }}"
+          echo "Release version is ${{ steps.extract-release-version.outputs.RELEASE_VERSION }}"
+  
+  compare-versions:
+    name: Compare versions
+
+    needs: get-versions
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Compare versions
+        env:
+          PKG_VERSION: ${{ needs.get-versions.outputs.PKG_VERSION }}
+          RELEASE_VERSION: ${{ needs.get-versions.outputs.RELEASE_VERSION }}
+        run: |
+          if [ "${{ env.PKG_VERSION }}" != "${{ env.RELEASE_VERSION }}" ]; then
+            echo "Version mismatch: package.json version (${{ env.PKG_VERSION }}) does not match release version (${{ env.RELEASE_VERSION }})"
+            exit 1
+          else
+            echo "Version match: package.json version (${{ env.PKG_VERSION }}) matches release version (${{ env.RELEASE_VERSION }})"
           fi
+        shell: bash
 
   test:
-    needs: check-version
+    needs: compare-versions
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
