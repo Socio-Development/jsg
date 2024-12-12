@@ -12,8 +12,12 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Get package version
-        id: get-pkg-version
-        run: echo "::set-output name=version::$(cat package.json | jq -r '.version')"
+        id: pkg-version
+        run: |
+          PACKAGE_JSON_PATH="${1-.}"
+          echo "Reading package.json from ${PACKAGE_JSON_PATH}/package.json"
+          PACKAGE_VERSION=$(cat ${PACKAGE_JSON_PATH}/package.json | jq '.version' | tr -d '"')
+          echo "current-version=${PACKAGE_VERSION}" >> $GITHUB_OUTPUT
 
       - name: Print package version
-        run: echo "Package version is ${{ steps.get-pkg-version.outputs.version }}"
+        run: echo "Package version is ${{ steps.pkg-version.outputs.version }}"
