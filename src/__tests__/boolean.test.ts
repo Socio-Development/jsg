@@ -2,22 +2,16 @@ import { JsgBoolean } from '../boolean'
 
 describe('JsgBoolean', () => {
   describe('constructor', () => {
-    it('sets base type property to boolean', () => {
+    it('sets _baseProps to "boolean"', () => {
       const el = new JsgBoolean()
 
-      const actual = el['_baseProps'].type
-      const expected = 'boolean'
-
-      expect(actual).toBe(expected)
+      expect(el['_baseProps'].type).toBe('boolean')
     })
 
-    it('sets props to empty object', () => {
+    it('sets _props to {}', () => {
       const el = new JsgBoolean()
 
-      const actual = el['_props']
-      const expected = {}
-
-      expect(actual).toEqual(expected)
+      expect(el['_props']).toStrictEqual({})
     })
   })
 })
