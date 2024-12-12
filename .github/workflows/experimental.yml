@@ -39,9 +39,6 @@ jobs:
         run: |
           echo "Package version is ${{ steps.extract-package-version.outputs.PKG_VERSION }}"
           echo "Release version is ${{ steps.extract-release-version.outputs.RELEASE_VERSION }}"
-        env:
-          PKG_VERSION: ${{ steps.extract-package-version.outputs.PKG_VERSION }}
-          RELEASE_VERSION: ${{ steps.extract-release-version.outputs.RELEASE_VERSION }}
   
   compare-versions:
     name: Compare versions
