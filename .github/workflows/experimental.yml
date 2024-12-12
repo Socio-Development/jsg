@@ -14,6 +14,7 @@ jobs:
       - name: Get package version
         id: pkg-version
         run: echo "current-version=$(cat ./package.json | jq '.version' | tr -d '"')" >> $GITHUB_OUTPUT
+        shell: bash
 
       - name: Print package version
         run: echo "Package version is ${{ steps.pkg-version.outputs.version }}"
