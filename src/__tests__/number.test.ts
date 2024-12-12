@@ -2,132 +2,56 @@ import { JsgNumber } from '../number'
 
 describe('JsgNumber', () => {
   describe('constructor', () => {
-    it('sets base type property to number', () => {
+    it('sets _baseProps to "number"', () => {
       const el = new JsgNumber()
 
-      const actual = el['_baseProps'].type
-      const expected = 'number'
-
-      expect(actual).toBe(expected)
+      expect(el['_baseProps'].type).toBe('number')
     })
 
-    it('sets props to empty object', () => {
+    it('sets _props to {}', () => {
       const el = new JsgNumber()
 
-      const actual = el['_props']
-      const expected = {}
-
-      expect(actual).toEqual(expected)
+      expect(el['_props']).toStrictEqual({})
     })
   })
 
   describe('exclusiveMaximum', () => {
-    it('sets exclusiveMaximum property', () => {
-      const el = new JsgNumber()
+    it('sets _props.exclusiveMaximum to 255', () => {
+      const el = new JsgNumber().exclusiveMaximum(255)
 
-      el.exclusiveMaximum(10)
-
-      const actual = el['_props'].exclusiveMaximum
-      const expected = 10
-
-      expect(actual).toBe(expected)
-    })
-
-    it('returns this', () => {
-      const el = new JsgNumber()
-
-      const actual = el.exclusiveMaximum(10)
-      const expected = el
-
-      expect(actual).toBe(expected)
+      expect(el['_props'].exclusiveMaximum).toBe(255)
     })
   })
 
   describe('exclusiveMinimum', () => {
-    it('sets exclusiveMinimum property', () => {
-      const el = new JsgNumber()
+    it('sets _props.exclusiveMinimum to 0', () => {
+      const el = new JsgNumber().exclusiveMinimum(0)
 
-      el.exclusiveMinimum(10)
-
-      const actual = el['_props'].exclusiveMinimum
-      const expected = 10
-
-      expect(actual).toBe(expected)
-    })
-
-    it('returns this', () => {
-      const el = new JsgNumber()
-
-      const actual = el.exclusiveMinimum(10)
-      const expected = el
-
-      expect(actual).toBe(expected)
+      expect(el['_props'].exclusiveMinimum).toBe(0)
     })
   })
 
   describe('maximum', () => {
-    it('sets maximum property', () => {
-      const el = new JsgNumber()
+    it('sets _props.maximum to 100', () => {
+      const el = new JsgNumber().maximum(100)
 
-      el.maximum(10)
-
-      const actual = el['_props'].maximum
-      const expected = 10
-
-      expect(actual).toBe(expected)
-    })
-
-    it('returns this', () => {
-      const el = new JsgNumber()
-
-      const actual = el.maximum(10)
-      const expected = el
-
-      expect(actual).toBe(expected)
+      expect(el['_props'].maximum).toBe(100)
     })
   })
 
   describe('minimum', () => {
-    it('sets minimum property', () => {
-      const el = new JsgNumber()
+    it('sets _props.minimum to 1', () => {
+      const el = new JsgNumber().minimum(1)
 
-      el.minimum(10)
-
-      const actual = el['_props'].minimum
-      const expected = 10
-
-      expect(actual).toBe(expected)
-    })
-
-    it('returns this', () => {
-      const el = new JsgNumber()
-
-      const actual = el.minimum(10)
-      const expected = el
-
-      expect(actual).toBe(expected)
+      expect(el['_props'].minimum).toBe(1)
     })
   })
 
   describe('multipleOf', () => {
-    it('sets multipleOf property', () => {
-      const el = new JsgNumber()
+    it('sets _props.multipleOf to 10', () => {
+      const el = new JsgNumber().multipleOf(10)
 
-      el.multipleOf(10)
-
-      const actual = el['_props'].multipleOf
-      const expected = 10
-
-      expect(actual).toBe(expected)
-    })
-
-    it('returns this', () => {
-      const el = new JsgNumber()
-
-      const actual = el.multipleOf(10)
-      const expected = el
-
-      expect(actual).toBe(expected)
+      expect(el['_props'].multipleOf).toBe(10)
     })
   })
 })
