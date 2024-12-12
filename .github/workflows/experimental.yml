@@ -21,9 +21,12 @@ jobs:
           PKG_JSON_PATH="${ROOT_PATH}/package.json"
           PKG_VERSION=$(jq -r '.version' < "${PKG_JSON_PATH}")
           echo "PKG_VERSION=${PKG_VERSION}" >> $GITHUB_ENV
+          if [ "${{ env.PKG_VERSION }}" -z ]; then
+            echo "Failed to extract package version from ${PKG_JSON_PATH}"
+            exit 1
+          fi
 
       - name: Print package version
         shell: bash
         run: |
           echo "Package version is ${{ env.PKG_VERSION }}"
-          echo "Package version is ${{ github.env.PKG_VERSION }}"
