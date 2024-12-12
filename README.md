@@ -2,6 +2,47 @@
 
 JSG is a TypeScript-first JSON schema declaration library inspired by [zod](https://zod.dev/).
 
+## Installation
+
+### From npm
+
+```bash
+npm i @socio-development/jsg
+deno add npm:@socio-development/jsg
+yarn add @socio-development/jsg
+bun add @socio-development/jsg
+pnpm add @socio-development/jsg
+```
+
+## Basic usage
+
+>These examples assumes you are using npm, typescript, and importing directly from the `@socio-development/jsg` package.
+
+Creating a simple JSON string element
+
+**TypeScript**
+```ts
+import jsg from '@socio-development/jsg'
+
+// Creating a schema for strings
+const mySchema = jsg.string()
+
+// Outputting the schema
+console.log(JSON.stringify(mySchema, null, 2))
+```
+
+**JSON**
+```json
+{
+  "type": "string"
+}
+```
+
+An upcoming version will include tooling for outputting the schema. Maybe even writing it to a file.
+
+## Advanced usage
+
+**TypeScript**
 ```ts
 import jsg from '@socio-development/jsg'
 
@@ -33,6 +74,7 @@ const userSchema = jsg.object({
 console.log(JSON.stringify(userSchema, null, 2))
 ```
 
+**JSON**
 ```json
 {
   "type": "object",
