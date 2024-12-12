@@ -1,4 +1,4 @@
-name: Experimantal
+name: Experimental
 
 on:
   push:
@@ -47,6 +47,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Compare versions
         run: |
           if [ "${{ env.PKG_VERSION }}" != "${{ env.RELEASE_VERSION }}" ]; then
