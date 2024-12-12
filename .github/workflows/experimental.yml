@@ -4,6 +4,9 @@ on:
   push:
     branches: [ experimental/* ]
 
+env:
+  PKG_VERSION: null
+
 jobs:
   get-pkg-version:
     runs-on: ubuntu-latest
@@ -21,4 +24,6 @@ jobs:
 
       - name: Print package version
         shell: bash
-        run: echo "Package version is ${{ github.env.PKG_VERSION }}"
+        run: |
+          echo "Package version is ${{ env.PKG_VERSION }}"
+          echo "Package version is ${{ github.env.PKG_VERSION }}"
