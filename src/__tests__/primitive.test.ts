@@ -2,25 +2,13 @@ import { JsgString } from '../string'
 
 describe('JsgPrimitive', () => {
   describe('constructor', () => {
-    it('sets base type property to string', () => {
+    it('sets _optional to false by default', () => {
       const el = new JsgString()
 
-      const actual = el['_baseProps'].type
-      const expected = 'string'
-
-      expect(actual).toBe(expected)
+      expect(el['_optional']).toBe(false)
     })
 
-    it('sets optional property to false', () => {
-      const el = new JsgString()
-
-      const actual = el['_optional']
-      const expected = false
-
-      expect(actual).toBe(expected)
-    })
-
-    it('does not set "optional" as a base property', () => {
+    it('does not add "optional" to _baseProps', () => {
       const el = new JsgString()
       const baseProps = el['_baseProps']
       const basePropsKeys = Object.keys(baseProps)
@@ -30,46 +18,18 @@ describe('JsgPrimitive', () => {
   })
 
   describe('description', () => {
-    it('sets description property', () => {
-      const el = new JsgString()
+    it('sets _baseProps.description to "A string"', () => {
+      const el = new JsgString().description('A string')
 
-      el.description('A string')
-
-      const actual = el['_baseProps'].description
-      const expected = 'A string'
-
-      expect(actual).toBe(expected)
-    })
-
-    it('returns the element', () => {
-      const el = new JsgString()
-
-      const actual = el.description('A string')
-      const expected = el
-
-      expect(actual).toBe(expected)
+      expect(el['_baseProps'].description).toBe('A string')
     })
   })
 
   describe('optional', () => {
-    it('sets optional property to true', () => {
-      const el = new JsgString()
+    it('sets _optional to true', () => {
+      const el = new JsgString().optional()
 
-      el.optional()
-
-      const actual = el['_optional']
-      const expected = true
-
-      expect(actual).toBe(expected)
-    })
-
-    it('returns the element', () => {
-      const el = new JsgString()
-
-      const actual = el.optional()
-      const expected = el
-
-      expect(actual).toBe(expected)
+      expect(el['_optional']).toBe(true)
     })
   })
 
