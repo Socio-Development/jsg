@@ -4,15 +4,15 @@ on:
   push:
     branches: [ experimental/* ]
 
-env:
-  PKG_VERSION: '0'
-  RELEASE_VERSION: '1'
-
 jobs:
   get-versions:
     name: Get versions
 
     runs-on: ubuntu-latest
+
+    outputs:
+      PKG_VERSION: ${{ steps.extract-package-version.outputs.PKG_VERSION }}
+      RELEASE_VERSION: ${{ steps.extract-release-version.outputs.RELEASE_VERSION }}
 
     steps:
       - name: Checkout
@@ -51,10 +51,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Compare versions
+        env:
+          PKG_VERSION: ${{ needs.get-versions.outputs.PKG_VERSION }}
+          RELEASE_VERSION: ${{ needs.get-versions.outputs.RELEASE_VERSION }}
         run: |
           if [ "${{ env.PKG_VERSION }}" != "${{ env.RELEASE_VERSION }}" ]; then
             echo "Version mismatch: package.json version (${{ env.PKG_VERSION }}) does not match release version (${{ env.RELEASE_VERSION }})"
