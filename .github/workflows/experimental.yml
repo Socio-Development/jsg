@@ -17,8 +17,12 @@ jobs:
         run: |
           ROOT_PATH="${1-.}"
           echo "Using root path: $ROOT_PATH"
+
           PKG_JSON_PATH="${ROOT_PATH}/package.json"
-          echo "Reading package.json from ${PKG_JSON_PATH}"
+          echo "Reading package.json from $PKG_JSON_PATH"
+
+          PKG_VERSION=$(jq -r '.version' < "${PKG_JSON_PATH}")
+          echo "Package version is $PKG_VERSION"
 
       - name: Print package version
         if: false
