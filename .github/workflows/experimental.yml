@@ -24,6 +24,9 @@ jobs:
           PKG_VERSION=$(jq -r '.version' < "${PKG_JSON_PATH}")
           echo "Package version is $PKG_VERSION"
 
+          echo "PKG_VERSION=${PKG_VERSION}" >> $GITHUB_OUTPUT
+          echo "Output: \"$GITHUB_OUTPUT\""
+
       - name: Print package version
         if: false
         run: echo "Package version is ${{ steps.pkg-version.outputs.version }}"
