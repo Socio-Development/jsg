@@ -2,88 +2,40 @@ import { JsgString } from '../string'
 
 describe('JsgString', () => {
   describe('constructor', () => {
-    it('sets base type property to string', () => {
+    it('sets _baseProps to "string"', () => {
       const el = new JsgString()
 
-      const actual = el['_baseProps'].type
-      const expected = 'string'
-
-      expect(actual).toBe(expected)
+      expect(el['_baseProps'].type).toBe('string')
     })
 
-    it('sets props to empty object', () => {
+    it('sets _props to {}', () => {
       const el = new JsgString()
 
-      const actual = el['_props']
-      const expected = {}
-
-      expect(actual).toEqual(expected)
+      expect(el['_props']).toStrictEqual({})
     })
   })
 
   describe('maxLength', () => {
-    it('sets maxLength property', () => {
-      const el = new JsgString()
+    it('sets _props.maxLength to 10', () => {
+      const el = new JsgString().maxLength(10)
 
-      el.maxLength(10)
-
-      const actual = el['_props'].maxLength
-      const expected = 10
-
-      expect(actual).toBe(expected)
-    })
-
-    it('returns this', () => {
-      const el = new JsgString()
-
-      const actual = el.maxLength(10)
-      const expected = el
-
-      expect(actual).toBe(expected)
+      expect(el['_props'].maxLength).toBe(10)
     })
   })
 
   describe('minLength', () => {
-    it('sets minLength property', () => {
-      const el = new JsgString()
+    it('sets _props.minLength to 5', () => {
+      const el = new JsgString().minLength(5)
 
-      el.minLength(10)
-
-      const actual = el['_props'].minLength
-      const expected = 10
-
-      expect(actual).toBe(expected)
-    })
-
-    it('returns this', () => {
-      const el = new JsgString()
-
-      const actual = el.minLength(10)
-      const expected = el
-
-      expect(actual).toBe(expected)
+      expect(el['_props'].minLength).toBe(5)
     })
   })
 
   describe('pattern', () => {
-    it('sets pattern property', () => {
-      const el = new JsgString()
+    it('sets _props.pattern to "^[a-zA-Z]"', () => {
+      const el = new JsgString().pattern('^[a-zA-Z]')
 
-      el.pattern('test')
-
-      const actual = el['_props'].pattern
-      const expected = 'test'
-
-      expect(actual).toBe(expected)
-    })
-
-    it('returns this', () => {
-      const el = new JsgString()
-
-      const actual = el.pattern('test')
-      const expected = el
-
-      expect(actual).toBe(expected)
+      expect(el['_props'].pattern).toBe('^[a-zA-Z]')
     })
   })
 })
