@@ -1,3 +1,4 @@
+import { JsgFlag } from './enums'
 import JsgPrimitive from './primitive'
 import type { JsgAny, JsgAnyProps, JsgObjectProps, JsgProps } from './types'
 
@@ -49,7 +50,7 @@ export class JsgObject extends JsgPrimitive<JsgObjectProps> {
 
   private get _required(): string[] | undefined {
     const requiredKeys = this._properties
-      .filter(({ value }) => !value['_optional'])
+      .filter(({ value }) => !value['_flags'].includes(JsgFlag.OPTIONAL))
       .map(({ key }) => key)
 
     return requiredKeys.length > 0 ? requiredKeys : undefined

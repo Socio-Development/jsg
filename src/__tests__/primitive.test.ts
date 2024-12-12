@@ -1,22 +1,6 @@
 import { JsgString } from '../string'
 
 describe('JsgPrimitive', () => {
-  describe('constructor', () => {
-    it('sets _optional to false by default', () => {
-      const el = new JsgString()
-
-      expect(el['_optional']).toBe(false)
-    })
-
-    it('does not add "optional" to _baseProps', () => {
-      const el = new JsgString()
-      const baseProps = el['_baseProps']
-      const basePropsKeys = Object.keys(baseProps)
-
-      expect(basePropsKeys).not.toContain('optional')
-    })
-  })
-
   describe('description', () => {
     it('sets _baseProps.description to "A string"', () => {
       const el = new JsgString().description('A string')
@@ -26,10 +10,16 @@ describe('JsgPrimitive', () => {
   })
 
   describe('optional', () => {
-    it('sets _optional to true', () => {
+    it('adds JsgFlag.OPTIONAL to _flags', () => {
       const el = new JsgString().optional()
 
-      expect(el['_optional']).toBe(true)
+      expect(el['_flags']).toEqual(['opt'])
+    })
+
+    it('does not add JsgFlag.OPTIONAL to _flags if it already exists', () => {
+      const el = new JsgString().optional().optional()
+
+      expect(el['_flags']).toEqual(['opt'])
     })
   })
 
