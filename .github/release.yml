@@ -1,0 +1,21 @@
+changelog:
+  categories:
+    - title: 🚀 Features
+      labels:
+        - feat
+        - feature
+        - enhancement
+    - title: 🐛 Bug Fixes
+      labels:
+        - bug
+        - bugfix
+        - fix
+    - title: 🧰 Maintenance
+      labels:
+        - chore
+    - title: Other Changes
+      labels:
+        - "*"
+  exclude:
+    labels:
+      - skip-changelog
