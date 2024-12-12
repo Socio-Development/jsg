@@ -38,8 +38,9 @@
     "declaration": true,
 
     "jsx": "preserve",
-    "outDir": "dist"
+    "outDir": "lib",
+    "skipLibCheck": true
   },
   "include": ["src/**/*"],
-  "exclude": ["coverage", "dist", "node_modules", "src/**/*.test.ts"]
+  "exclude": ["coverage", "dist", "lib", "node_modules", "src/**/*.test.ts"]
 }
