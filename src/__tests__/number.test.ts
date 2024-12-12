@@ -1,4 +1,4 @@
-import { JsgNumber } from './number'
+import { JsgNumber } from '../number'
 
 describe('JsgNumber', () => {
   describe('constructor', () => {

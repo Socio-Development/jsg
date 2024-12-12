@@ -1,7 +1,7 @@
-import { JsgObject } from '../src/object'
-import { JsgNumber } from './number'
-import { JsgString } from './string'
-import type { JsgAny } from './types'
+import { JsgObject } from '../object'
+import { JsgNumber } from '../number'
+import { JsgString } from '../string'
+import type { JsgAny } from '../types'
 
 describe('JsgObject', () => {
   describe('constructor', () => {

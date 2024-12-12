@@ -1,4 +1,4 @@
-import { JsgString } from './string'
+import { JsgString } from '../string'
 
 describe('JsgString', () => {
   describe('constructor', () => {

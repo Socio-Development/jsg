@@ -1,4 +1,4 @@
-import { JsgArray } from './array'
+import { JsgArray } from '../array'
 
 describe('JsgArray', () => {
   describe('constructor', () => {

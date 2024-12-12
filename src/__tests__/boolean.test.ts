@@ -1,4 +1,4 @@
-import { JsgBoolean } from '../src/boolean'
+import { JsgBoolean } from '../boolean'
 
 describe('JsgBoolean', () => {
   describe('constructor', () => {
