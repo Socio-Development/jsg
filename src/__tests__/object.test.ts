@@ -1,90 +1,54 @@
 import { JsgObject } from '../object'
 import { JsgNumber } from '../number'
 import { JsgString } from '../string'
-import type { JsgAny } from '../types'
 
 describe('JsgObject', () => {
   describe('constructor', () => {
-    it('sets base type property to object', () => {
+    it('sets _baseProps to "object"', () => {
       const el = new JsgObject()
 
-      const actual = el['_baseProps'].type
-      const expected = 'object'
-
-      expect(actual).toBe(expected)
+      expect(el['_baseProps'].type).toBe('object')
     })
 
-    it('sets props to empty object', () => {
+    it('sets _properties to []', () => {
       const el = new JsgObject()
 
-      const actual = el['_props']
-      const expected = {}
-
-      expect(actual).toEqual(expected)
+      expect(el['_properties']).toEqual([])
     })
 
-    it('sets properties to empty array', () => {
-      const el = new JsgObject()
-
-      const actual = el['_properties']
-      const expected: { key: string; value: JsgAny }[] = []
-
-      expect(actual).toEqual(expected)
-    })
-
-    it('sets properties from argument', () => {
+    it('sets properties from argument and sorts by key', () => {
+      const ageEl = new JsgNumber()
+      const nameEl = new JsgString()
       const el = new JsgObject({
-        age: new JsgNumber(),
-        name: new JsgString(),
+        name: nameEl,
+        age: ageEl,
       })
 
-      const actual = el['_properties']
-      const expected = [
-        { key: 'age', value: new JsgNumber() },
-        { key: 'name', value: new JsgString() },
-      ]
-
-      expect(actual).toEqual(expected)
-    })
-
-    it('sorts properties by key', () => {
-      const el = new JsgObject({
-        b: new JsgString(),
-        a: new JsgNumber(),
-      })
-
-      const actual = el['_properties']
-      const expected = [
-        { key: 'a', value: new JsgNumber() },
-        { key: 'b', value: new JsgString() },
-      ]
-
-      expect(actual).toEqual(expected)
+      expect(el['_properties']).toStrictEqual([
+        { key: 'age', value: ageEl },
+        { key: 'name', value: nameEl },
+      ])
     })
   })
 
   describe('_propertiesToJSON', () => {
-    it('returns undefined when _properties.length < 1', () => {
+    it('returns undefined when _properties is []', () => {
       const el = new JsgObject()
 
-      const jsonProperties = el['_propertiesToJSON']
-
-      expect(jsonProperties).toBeUndefined()
+      expect(el['_properties']).toStrictEqual([])
+      expect(el['_propertiesToJSON']).toBeUndefined()
     })
 
-    it('returns properties as JSON', () => {
+    it('returns the JSON format of _properties', () => {
       const el = new JsgObject({
         age: new JsgNumber().minimum(0),
         name: new JsgString(),
       })
 
-      const actual = el['_propertiesToJSON']
-      const expected = {
+      expect(el['_propertiesToJSON']).toStrictEqual({
         age: { type: 'number', minimum: 0 },
         name: { type: 'string' },
-      }
-
-      expect(actual).toEqual(expected)
+      })
     })
 
     it('sorts properties by key', () => {
@@ -93,24 +57,18 @@ describe('JsgObject', () => {
         a: new JsgNumber(),
       })
 
-      const actual = el['_propertiesToJSON']
-      const expected = {
-        a: new JsgNumber().toJSON(),
-        b: new JsgString().toJSON(),
-      }
-
-      expect(actual).toEqual(expected)
+      expect(el['_propertiesToJSON']).toStrictEqual({
+        a: { type: 'number' },
+        b: { type: 'string' },
+      })
     })
   })
 
   describe('_props', () => {
-    it('returns empty object when _propertiesToJSON is undefined', () => {
+    it('returns {} when _propertiesToJSON is undefined', () => {
       const el = new JsgObject()
 
-      const actual = el['_props']
-      const expected = {}
-
-      expect(actual).toEqual(expected)
+      expect(el['_props']).toStrictEqual({})
     })
 
     it('returns properties when _propertiesToJSON is defined', () => {
