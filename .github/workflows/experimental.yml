@@ -13,11 +13,7 @@ jobs:
 
       - name: Get package version
         id: pkg-version
-        run: |
-          PACKAGE_JSON_PATH="${1-.}"
-          echo "Reading package.json from ${PACKAGE_JSON_PATH}/package.json"
-          PACKAGE_VERSION=$(cat ${PACKAGE_JSON_PATH}/package.json | jq '.version' | tr -d '"')
-          echo "current-version=${PACKAGE_VERSION}" >> $GITHUB_OUTPUT
+        run: echo "current-version=$(cat ./package.json | jq '.version' | tr -d '"')" >> $GITHUB_OUTPUT
 
       - name: Print package version
         run: echo "Package version is ${{ steps.pkg-version.outputs.version }}"
