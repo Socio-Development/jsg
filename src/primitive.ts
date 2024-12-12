@@ -1,14 +1,23 @@
+import { JsgFlag } from './enums'
 import type { JsgBaseProps, JsgBaseType, JsgProps } from './types'
 
 export default abstract class JsgPrimitive<T> {
+  /**
+   * The base properties available to every JSON schema primitive.
+   */
   private _baseProps: JsgBaseProps
-  // @ts-ignore Used by JsgObject to determine if a property is optional
-  private _optional: boolean
+  /**
+   * Flags used to modify the behavior of the element.
+   */
+  private _flags: JsgFlag[]
+  /**
+   * The properties specific to the primitive type.
+   */
   abstract _props: T
 
   constructor(type: JsgBaseType) {
     this._baseProps = { type }
-    this._optional = false
+    this._flags = []
   }
 
   /**
@@ -24,7 +33,9 @@ export default abstract class JsgPrimitive<T> {
    * Prevents the element from being required in the parent object.
    */
   optional(): this {
-    this._optional = true
+    if (!this._flags.includes(JsgFlag.OPTIONAL)) {
+      this._flags.push(JsgFlag.OPTIONAL)
+    }
     return this
   }
 
