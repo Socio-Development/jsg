@@ -12,4 +12,12 @@ export class JsgBoolean extends JsgPrimitive<JsgBooleanProps> {
 
     this._props = {}
   }
+
+  /**
+   * An instance validates successfully against this keyword if its value is equal to the value of the keyword.
+   */
+  const(value: boolean): this {
+    this._props.const = value
+    return this
+  }
 }
