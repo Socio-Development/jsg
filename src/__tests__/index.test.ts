@@ -1,9 +1,9 @@
-import { JsgArray } from './array'
-import { JsgBoolean } from './boolean'
-import jsg from './index'
-import { JsgNumber } from './number'
-import { JsgObject } from './object'
-import { JsgString } from './string'
+import { JsgArray } from '../array'
+import { JsgBoolean } from '../boolean'
+import jsg from '../index'
+import { JsgNumber } from '../number'
+import { JsgObject } from '../object'
+import { JsgString } from '../string'
 
 describe('jsg', () => {
   describe('array', () => {
