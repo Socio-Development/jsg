@@ -20,4 +20,5 @@ jobs:
           echo "PKG_VERSION=${PKG_VERSION}" >> $GITHUB_ENV
 
       - name: Print package version
+        shell: bash
         run: echo "Package version is ${{ github.env.PKG_VERSION }}"
