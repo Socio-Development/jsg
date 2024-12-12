@@ -13,7 +13,7 @@ jobs:
     name: Get versions
 
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,7 +24,7 @@ jobs:
           ROOT_PATH="${1-.}"
           PKG_JSON_PATH="${ROOT_PATH}/package.json"
           PKG_VERSION=$(jq -r '.version' < "${PKG_JSON_PATH}")
-          echo "PKG_VERSION=${PKG_VERSION}" >> $GITHUB_ENV
+          echo "PKG_VERSION=v${PKG_VERSION}" >> $GITHUB_ENV
 
       - name: Extract release version
         id: rel
@@ -37,10 +37,19 @@ jobs:
         shell: bash
         run: |
           echo "Package version is ${{ env.PKG_VERSION }}"
+          echo "Release version is ${{ env.RELEASE_VERSION }}"
+  
+  compare-versions:
+    name: Compare versions
 
+    needs: get-versions
+
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Compare versions
         run: |
-          if [ "v${{ env.PKG_VERSION }}" != "${{ env.RELEASE_VERSION }}" ]; then
+          if [ "${{ env.PKG_VERSION }}" != "${{ env.RELEASE_VERSION }}" ]; then
             echo "Version mismatch: package.json version (${{ env.PKG_VERSION }}) does not match release version (${{ env.RELEASE_VERSION }})"
             exit 1
           else
