@@ -1,0 +1,19 @@
+name: Experimantal
+
+on:
+  push:
+    branches: [ experimental/* ]
+
+jobs:
+  get-pkg-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Get package version
+        id: get-pkg-version
+        run: echo "::set-output name=version::$(cat package.json | jq -r '.version')"
+
+      - name: Print package version
+        run: echo "Package version is ${{ steps.get-pkg-version.outputs.version }}"
