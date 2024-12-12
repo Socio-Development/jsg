@@ -43,7 +43,9 @@ export type JsgBaseType = 'array' | 'boolean' | 'number' | 'object' | 'string'
 /**
  * Properties available for the JSON schema boolean type.
  */
-export type JsgBooleanProps = {}
+export type JsgBooleanProps = {
+  const?: boolean
+}
 
 /**
  * Properties available for the JSON schema number type.

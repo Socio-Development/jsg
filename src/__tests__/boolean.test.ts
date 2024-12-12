@@ -14,4 +14,12 @@ describe('JsgBoolean', () => {
       expect(el['_props']).toStrictEqual({})
     })
   })
+
+  describe('const', () => {
+    it('sets _props.const to true', () => {
+      const el = new JsgBoolean().const(true)
+
+      expect(el['_props'].const).toBe(true)
+    })
+  })
 })
