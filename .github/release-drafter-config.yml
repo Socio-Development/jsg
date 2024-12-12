@@ -28,6 +28,6 @@ version-resolver:
 exclude-labels:
 - 'skip-changelog'
 template: |
-  ## Changes
+  # What's Changed
 
   $CHANGES
